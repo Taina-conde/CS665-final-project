@@ -8,8 +8,8 @@ public class HTMLProduct {
     public void add(String step) {
         steps.addLast(step);
     }
-    public void showUIProduct() {
-        System.out.println("User interface completed as below: ");
+    public void showHTMLProduct() {
+        System.out.println("HTML completed as below: ");
         for (String step: steps) {
             System.out.println(step);
         }

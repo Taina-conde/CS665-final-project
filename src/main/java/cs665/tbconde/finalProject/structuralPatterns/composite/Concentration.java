@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public class Concentration extends CourseComposite {
     ArrayList<CourseComposite> components = new ArrayList<CourseComposite>();
-    String title;
-    String description;
     public Concentration(String title, String description) {
         this.title = title;
         this.description = description;

@@ -9,9 +9,7 @@ import java.util.ArrayList;
 public class Course extends CourseComposite {
     int maxStudents = 20;
     ArrayList<Student> studentsEnrolled;
-    String title;
     Faculty instructor;
-    String description;
     String syllabus;
     Subject waitList;
 
