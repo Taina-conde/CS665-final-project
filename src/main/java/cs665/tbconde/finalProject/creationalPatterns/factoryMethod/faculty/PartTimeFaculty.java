@@ -1,25 +1,16 @@
 package cs665.tbconde.finalProject.creationalPatterns.factoryMethod.faculty;
 
-import cs665.tbconde.finalProject.structuralPatterns.composite.concentration.Course;
+
+import java.util.ArrayList;
 
 public class PartTimeFaculty extends Faculty{
-    Course courseTeaching;
+    private final int MAX_SIZE = 1;
+    public PartTimeFaculty() { super();}
     public PartTimeFaculty(String name) {
         super.name = name;
+        super.coursesTeaching = new ArrayList<>(MAX_SIZE);
+        super.maxNumCourses = MAX_SIZE;
     }
-    public PartTimeFaculty(String name, Course courseTeaching) {
-        super.name = name;
-        this.courseTeaching = courseTeaching;
-    }
-
-    public void setCourseTeaching(Course courseTeaching) {
-        this.courseTeaching = courseTeaching;
-    }
-
-    public Course getCourseTeaching() {
-        return courseTeaching;
-    }
-
     @Override
     public String toString() {
         return super.toString() + " -> Part-time faculty : " + super.getName();

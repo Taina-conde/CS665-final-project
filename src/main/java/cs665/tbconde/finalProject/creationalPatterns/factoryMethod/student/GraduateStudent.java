@@ -1,9 +1,6 @@
 package cs665.tbconde.finalProject.creationalPatterns.factoryMethod.student;
 
-import cs665.tbconde.finalProject.behavioralPatterns.state.ElectivesIneligible;
-import cs665.tbconde.finalProject.program.Program;
-import cs665.tbconde.finalProject.program.ProgramType;
-import cs665.tbconde.finalProject.program.GraduateProgram;
+import cs665.tbconde.finalProject.creationalPatterns.factoryMethod.program.Program;
 
 public class GraduateStudent extends Student{
 

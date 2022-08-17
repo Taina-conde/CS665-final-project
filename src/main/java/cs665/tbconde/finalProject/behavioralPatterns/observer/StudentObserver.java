@@ -17,6 +17,6 @@ public class StudentObserver implements Observer{
     }
     public Student getStudent() {return this.student;}
     private void display() {
-        System.out.println("Message received by " + this.student.getName() + " : " + this.message);
+        System.out.println("\s\s\s Message received by Student " + this.student.getName() + " : " + this.message);
     }
 }

@@ -1,6 +1,6 @@
 package cs665.tbconde.finalProject.creationalPatterns.factoryMethod.student;
 
-import cs665.tbconde.finalProject.program.Program;
+import cs665.tbconde.finalProject.creationalPatterns.factoryMethod.program.Program;
 
 public class GraduateStudentFactory extends StudentFactory {
     public GraduateStudentFactory(String name, Program programEnrolled) {

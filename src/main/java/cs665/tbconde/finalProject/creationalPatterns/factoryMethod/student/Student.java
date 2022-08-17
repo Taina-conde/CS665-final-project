@@ -4,8 +4,8 @@ import cs665.tbconde.finalProject.behavioralPatterns.state.ElectivesEligible;
 import cs665.tbconde.finalProject.behavioralPatterns.state.ElectivesIneligible;
 import cs665.tbconde.finalProject.behavioralPatterns.state.PossibleState;
 import cs665.tbconde.finalProject.creationalPatterns.factoryMethod.faculty.Faculty;
-import cs665.tbconde.finalProject.program.Program;
-import cs665.tbconde.finalProject.structuralPatterns.composite.concentration.Course;
+import cs665.tbconde.finalProject.creationalPatterns.factoryMethod.program.Program;
+import cs665.tbconde.finalProject.structuralPatterns.composite.Course;
 
 import java.util.ArrayList;
 
@@ -78,10 +78,7 @@ public abstract class Student {
                 ", grades=" + grades +
                 ", semestersCompleted=" + semestersCompleted;
     }
-    public void alert(String message) {
-        System.out.println("Message received by " + this.name + " : " + message);
 
-    }
     public Program getProgramEnrolled() {
         return programEnrolled;
     }
@@ -100,11 +97,21 @@ public abstract class Student {
 
     public PossibleState getCurrentState() { return currentState;}
     public void setCurrentState(PossibleState state) { this.currentState = state;}
-    public void enrollInCourse(Course course) {
-        boolean isElective = programEnrolled.getElectiveCoursesList().contains(course);
-        if (isElective)
-            currentState.enrollElective(this, course);
-        else
-            course.enrollStudent(this);
+    public void enrollInElective(Course course) {
+        currentState.enrollElective(this, course);
+    }
+    public void enrollInCore(Course course) {
+        course.enrollStudent(this);
+    }
+
+    public ArrayList<Course> getCoursesTaken() {
+        return coursesTaken;
+    }
+    public void addCourseTaken(Course course) {
+        coursesTaken.add(course);
+    }
+    public void dropCourse(Course course) {
+        coursesTaken.remove(course);
+
     }
 }

@@ -3,11 +3,10 @@ package cs665.tbconde.finalProject.creationalPatterns.singleton;
 import cs665.tbconde.finalProject.creationalPatterns.factoryMethod.faculty.*;
 import cs665.tbconde.finalProject.creationalPatterns.factoryMethod.student.*;
 import cs665.tbconde.finalProject.exceptions.CSDepartmentException;
-import cs665.tbconde.finalProject.program.GraduateProgram;
-import cs665.tbconde.finalProject.program.Program;
-import cs665.tbconde.finalProject.program.ProgramType;
-import cs665.tbconde.finalProject.program.graduate.*;
-import cs665.tbconde.finalProject.structuralPatterns.composite.concentration.Course;
+import cs665.tbconde.finalProject.creationalPatterns.factoryMethod.program.Program;
+import cs665.tbconde.finalProject.creationalPatterns.factoryMethod.program.ProgramType;
+import cs665.tbconde.finalProject.creationalPatterns.factoryMethod.program.graduate.*;
+import cs665.tbconde.finalProject.structuralPatterns.composite.Course;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,14 +18,11 @@ public class CSDepartment {
     private Map<String, Course> courseMap;
     private Map<String, Program> programMap;
     private static CSDepartment uniqueInstance;
-    private Chairperson chairperson;
-
 
 
     private CSDepartment() {
         studentMap = new HashMap<>();
         facultyMap = new HashMap<>();
-        chairperson = Chairperson.getInstance();
         courseMap = new HashMap<>();
         programMap = new HashMap<>();
     }
@@ -108,22 +104,14 @@ public class CSDepartment {
             String title,
             Faculty instructor,
             String description,
-            String syllabus
+            String syllabus,
+            int maxStudents
     ) {
         findDuplicate(courseMap, courseID);
-        Course course = new Course(title, instructor,description, syllabus);
+        Course course = new Course(title, instructor,description, syllabus, maxStudents);
         this.courseMap.put(courseID, course);
+        instructor.addCourse(course);
         return course;
-
-    }
-    public synchronized Chairperson getChairperson() {
-        return this.chairperson;
-    }
-    public synchronized void enrollStudentInCourse(Course course, Student student) {
-        boolean isElective = student.getProgramEnrolled().getElectiveCoursesList().contains(course);
-        if (isElective)
-            course.enrollStudent(student);
-
     }
     public synchronized Program createGraduateProgram(
             String programName,
@@ -152,4 +140,21 @@ public class CSDepartment {
         this.programMap.put(type.name(), program);
         return program;
     }
+
+    public synchronized void enrollStudentInCourse(Course course, Student student) {
+        boolean isElective = student.getProgramEnrolled().getElectiveCoursesList().contains(course);
+        if (isElective)
+            student.enrollInElective(course);
+        else
+            student.enrollInCore(course);
+    }
+    public synchronized void dropStudentInCourse(Course course, Student student) {
+        String header = "Dropping student " + student.getName() +  " in " + course.getTitle();
+        System.out.println(header);
+        student.dropCourse(course);
+        course.dropStudent(student);
+    }
+
+
+
 }
