@@ -30,5 +30,5 @@ public class Concentration extends CourseComposite {
         }
         return null;
     }
-    
+
 }
